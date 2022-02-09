@@ -1,0 +1,318 @@
+/*Author: Stephanie Livengood
+Class: CSCI201
+Date last updated: Sept. 27, 2021
+Purpose: Create a list of beverages from derived classes*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+//base class beverage
+class Beverage {
+  
+  //public members
+  public:
+    string name, description;
+    int size, calories;
+    float price;
+
+    //Beverage constructor
+    Beverage(string,string, int, int, float);
+    Beverage();
+
+    //getter methods
+    string getName(){
+      return name;
+      
+    }
+
+    string getDescription() {
+      return description;
+    }
+
+    int getSize() {
+      return size;
+    }
+
+    int getCalories() {
+      return calories;
+    }
+
+    float getPrice() {
+      return price;
+    }
+
+    //setter methods
+    void setName(string n){
+      name = n;
+    }
+
+    void setDescription(string d){
+      description = d;
+    }
+
+    void setSize(int s){
+      size = s;
+    }
+
+    void setCalories(int c){
+      calories = c;
+    }
+
+    void setPrice(float p){
+      price = p;
+    }
+
+};
+
+//derived coffee class from beverage class
+class Coffee : public Beverage
+{
+  //public members
+  public:
+    string temperature, caffeinated, roastType, strength, creamer, sweetener;
+
+    //Coffee constructor
+    Coffee(string temp = " ", string caf =" ", string roast =" ", string str =" ", string crm =" ", string swt =" ");
+    
+    Coffee();
+    
+
+    //getter methods
+    string getTemp(){
+      return temperature;
+    }
+
+    string getCaffein(){
+      return caffeinated;
+    }
+
+    string getRoast(){
+      return roastType;
+    }
+
+    string getStrength(){
+      return strength;
+    }
+
+    string getCreamer(){
+      return creamer;
+    }
+
+    string getSweetener(){
+      return sweetener;
+    }
+
+    //setter methods
+    void setTemp(string temp){
+      temperature = temp;
+    }
+
+    void setCaffeine(string caf){
+      caffeinated = caf;
+    }
+
+    void setRoast(string roast){
+      roastType = roast;
+    }
+
+    void setStrength(string str) {
+      strength = str;
+    }
+
+    void setCreamer(string crm){
+      creamer = crm;
+    }
+
+    void setSweetener(string swt){
+      sweetener = swt;
+    }
+
+    //toString method that defines the beverage
+
+    void toString(){
+      cout<<"You created a(n) "<< temperature<<" coffee beverage with "<<caffeinated<<". It is a "<<strength<<" "<<roastType<<" coffee with "<<creamer<<" and "<<sweetener<<"."<<endl;
+    }
+  
+};
+
+//derived tea class from derived coffee class
+class Tea : public Coffee
+{
+  //public members
+  public:
+    string type, lemon;
+
+    //tea constructor
+    Tea(string= " ", string=" ", string=" ", string = " ",string =" ");
+
+    //getter methods
+    string getType(){
+      return type;
+    }
+
+    string getLemon(){
+      return lemon;
+    }
+
+    //setter methods
+    void setType(string typ){
+      type = typ;
+    }
+
+    void setLemon(string lem){
+      lemon = lem;
+    }
+
+    //toString method to define beverage made
+    void toString(){
+      cout<<"You created a(n) "<< type<<" "<<temperature<<" tea beverage with "<<creamer<<" "<<sweetener<<" and "<<lemon<<"."<<endl;
+    }
+
+};
+
+//derived soda class from derived tea class
+class Soda : public Tea
+{
+  //public members
+  public:
+    string brand, diet;
+
+    //soda constructor
+    Soda(string = " ", string =" ", string=" ");
+
+    //getter methods
+    string getBrand(){
+      return brand;
+    }
+
+    string getDiet(){
+      return diet;
+    }
+
+    //setter methods
+    void setBrand(string bran){
+      brand = bran;
+    }
+
+    void setDiet(string di){
+      diet = di;
+    }
+
+    //toString method to define beverage made
+    void toString(){
+      cout<<"You created a(n) "<<diet<<" "<< brand<<" "<<type<<" soda beverage."<<endl;
+    }
+};
+
+//derived energy drink class from derived soda class
+class energyDrink : public Soda
+{
+  //public members
+  public:
+    string stimulant;
+
+    //energy drink constructor
+    energyDrink(string = " ", string = " ", string=" ");
+
+    //getter methods
+    string getStimulant(){
+      return stimulant;
+    }
+
+    //setter methods
+    void setStimulant(string stim){
+      stimulant = stim;
+    }
+
+    //toString method to define beverage made
+    void toString(){
+      cout<<"You created a(n) "<< brand <<" energy drink beverage with "<<stimulant<<" and "<<sweetener<<"."<<endl;
+    }
+
+
+
+
+};
+
+//Beverage parameterized constructor
+Beverage::Beverage(string n, string d, int s, int c, float p ){
+  name = n;
+  description = d;
+  size = s;
+  calories = c;
+  price = p;
+}
+
+//Coffee parameterized constructor
+Coffee::Coffee(string temp, string caf, string roast, string str, string crm, string swt):Beverage(" ", " ", 0, 0, 0.00){
+  temperature = temp;
+  caffeinated = caf;
+  roastType = roast;
+  strength = str;
+  creamer = crm;
+  sweetener = swt;
+
+}
+
+//tea parameterized constructor
+Tea::Tea(string typ, string temp, string crm, string swt, string lem): Coffee(temp, crm, swt){
+  type = typ;
+  temperature = temp;
+  creamer = crm;
+  sweetener = swt;
+  lemon = lem;
+
+};
+
+//soda parameterized constructor
+Soda::Soda(string bran, string typ, string di): Tea(typ){
+  type = typ;
+  brand = bran;
+  diet = di;
+
+};
+
+//energy drink parameterized constructor
+energyDrink::energyDrink(string bran, string stim, string swt): Soda(bran){
+  brand = bran;
+  stimulant = stim;
+  sweetener = swt;
+};
+
+
+
+int main() {
+  
+  //Create coffee 
+  Coffee bev1("iced", "caffeine", "Dark", "Strong", "no creamer", "sweetener");
+
+  //create tea
+  Tea bev2("green", "cold", "no creamer", "sweetener", "lemon");
+
+  //create soda
+  Soda bev3("Coke", "cola", "diet");
+
+  //create energy drink
+  energyDrink bev4("Monster", "caffeine", "no sweetener");
+
+  //call toString functions to print list of beverages
+  bev1.toString();
+  bev2.toString();
+  bev3.toString();
+  bev4.toString();
+  
+
+
+
+  
+
+  
+
+
+  
+
+  
+
+  
+}
